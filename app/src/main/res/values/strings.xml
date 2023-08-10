@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MyWeather</string>
+    <string name="splash_logo1">Weather</string>
+    <string name="splash_logo2">Forcast</string>
 </resources>

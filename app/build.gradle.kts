@@ -77,7 +77,10 @@ dependencies {
     implementation(libs.androidx.hilt.work)
     implementation(libs.google.dagger.hilt.android)
     kapt(libs.google.dagger.hilt.android.compiler)
+
+    // AndroidX
     implementation(libs.androidx.work)
+
     
     // Other
     implementation(libs.timber)
