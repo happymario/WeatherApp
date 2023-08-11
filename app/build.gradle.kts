@@ -80,8 +80,22 @@ dependencies {
 
     // AndroidX
     implementation(libs.androidx.work)
+    implementation(libs.androidx.navigation)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    annotationProcessor(libs.androidx.room.compiler)
+    kapt(libs.androidx.room.compiler)
+    implementation(libs.androidx.datastore.preferences)
 
-    
+    // Network
+    implementation(libs.google.gson)
+    implementation(libs.bundles.retrofit2)
+    implementation(libs.okhttp3)
+    implementation(libs.okhttp3.logging.interceptor)
+
     // Other
     implementation(libs.timber)
 }

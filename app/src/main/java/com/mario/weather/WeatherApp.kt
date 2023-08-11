@@ -15,8 +15,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.mario.weather.home.HomeScreen
-import com.mario.weather.splash.SplashScreen
+import com.mario.weather.home.Home
+import com.mario.weather.splash.Splash
 
 @Composable
 fun WeatherApp(appState: WeatherAppState = rememberWeatherAppState()) {
@@ -49,10 +49,10 @@ fun WeatherApp(appState: WeatherAppState = rememberWeatherAppState()) {
                 modifier = Modifier.padding(it)
             ) {
                 composable(NestedGraph.SPLASH.route) { from ->
-                    SplashScreen()
+                    Splash(appState)
                 }
                 composable(NestedGraph.HOME.route) { from ->
-                    HomeScreen()
+                    Home(appState)
                 }
             }
         }

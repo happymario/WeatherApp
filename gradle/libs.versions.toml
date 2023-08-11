@@ -2,27 +2,37 @@
 # First
 agp = "8.2.0-alpha04"
 kotlin = "1.8.10"
-core-ktx = "1.9.0"
+core-ktx = "1.10.1"
 junit = "4.13.2"
 androidx-test-ext-junit = "1.1.5"
 espresso-core = "3.5.1"
 lifecycle-runtime-ktx = "2.6.1"
 activity-compose = "1.7.2"
-compose-bom = "2023.03.00"
+compose-bom = "2023.06.01"
 
 # Gradle
 google-hilt = "2.45"
 
 # AndroidX
+androidx-material3 = "1.1.1"
 androidx-hilt = "1.0.0"
 androidx-work = "2.8.1"
-material3 = "1.1.1"
+androidx-navigation = "2.6.0"
+androidx-livedata = "1.5.0"
+androidx-room = "2.5.2"
+androidx-datastore = "1.0.0"
 
 # Google
-google-dagger = "2.44.2"
+google-dagger = "2.46"
+google-gson = "2.10.1"
+
+# Network
+okhttp3 = "4.10.0"
+retrofit2 = "2.9.0"
 
 # Other
 timber = "5.0.1"
+
 
 [libraries]
 # First
@@ -39,20 +49,37 @@ ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3"}
+material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "androidx-material3"}
 
 
 # AndroidX
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidx-hilt" }
 androidx-hilt-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "androidx-hilt" }
 androidx-work = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "androidx-work" }
+androidx-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidx-navigation" }
+androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle-runtime-ktx" }
+androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle-runtime-ktx" }
+androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle-runtime-ktx" }
+androidx-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "androidx-livedata" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidx-room" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "androidx-room" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidx-room" }
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "androidx-datastore" }
 
 # Google
 google-dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "google-dagger" }
 google-dagger-hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "google-dagger" }
 
+# Network
+google-gson = { group = "com.google.code.gson", name = "gson", version.ref = "google-gson" }
+okhttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp3" }
+okhttp3-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp3" }
+retrofit2 = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit2" }
+retrofit2-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit2" }
+
 # Other
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
+
 
 [plugins]
 # First
@@ -64,4 +91,4 @@ google-hilt = { id = "com.google.dagger.hilt.android", version.ref = "google-hil
 
 
 [bundles]
-
+retrofit2 = ["retrofit2", 'retrofit2-converter-gson']

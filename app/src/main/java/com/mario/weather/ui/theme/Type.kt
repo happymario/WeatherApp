@@ -48,13 +48,13 @@ data class WeatherTypography(
     val heading01: TextStyle = TextStyle(
         fontFamily = DefaultFontFamily,
         fontWeight = FontWeight.SemiBold,
-        lineHeight = 38.sp,
-        fontSize = 28.sp
+        lineHeight = 33.sp,
+        fontSize = 40.sp
     ),
     val heading02: TextStyle = TextStyle(
         fontFamily = DefaultFontFamily,
-        fontWeight = FontWeight.SemiBold,
-        lineHeight = 32.sp,
+        fontWeight = FontWeight.Normal,
+        lineHeight = 33.sp,
         fontSize = 24.sp
     )
 )

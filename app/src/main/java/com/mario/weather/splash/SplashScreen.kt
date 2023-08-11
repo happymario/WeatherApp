@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -41,17 +42,24 @@ fun SplashScreen(onNavHome: () -> Unit = {}) {
                 alpha = 1.0f
             )
     ) {
-        Column (
+        Column(
             modifier = Modifier.align(Alignment.Center),
             horizontalAlignment = Alignment.CenterHorizontally
-        ){
+        ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_logo),
                 contentDescription = "logo",
                 modifier = Modifier.size(240.dp, 180.dp)
             )
-            Text(text = stringResource(id = R.string.splash_logo1), style = CustomTheme.typography.heading01)
-            Text(text = stringResource(id = R.string.splash_logo2) , style = CustomTheme.typography.heading02)
+            Text(
+                text = stringResource(id = R.string.splash_logo1),
+                style = CustomTheme.typography.heading01.copy(color = CustomTheme.colors.splash_logo_title)
+            )
+            Text(
+                text = stringResource(id = R.string.splash_logo2),
+                style = CustomTheme.typography.heading02.copy(color = CustomTheme.colors.splash_logo_sub),
+                modifier = Modifier.offset(y = (-10).dp)
+            )
         }
     }
 }
