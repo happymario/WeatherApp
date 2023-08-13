@@ -2,4 +2,8 @@
     <string name="app_name">MyWeather</string>
     <string name="splash_logo1">Weather</string>
     <string name="splash_logo2">Forcast</string>
+
+    <!-- Error -->
+    <string name="error_title_permission_not_granted">Error with Permission</string>
+    <string name="error_message_permission_not_granted">Permission is not granted!\nPlease grant the permission to continue to using app!</string>
 </resources>

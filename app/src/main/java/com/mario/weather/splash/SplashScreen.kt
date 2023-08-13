@@ -1,5 +1,7 @@
 package com.mario.weather.splash
 
+import android.Manifest
+import android.os.Build
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -9,28 +11,92 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.mario.weather.R
 import com.mario.weather.WeatherAppState
 import com.mario.weather.ui.theme.CustomTheme
 import com.mario.weather.ui.theme.MyWeatherTheme
 import com.mario.weather.ui.theme.SplashGradient1
 import com.mario.weather.ui.theme.SplashGradient2
+import kotlinx.coroutines.delay
 
+private const val SplashWaitTime: Long = 3000
+
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun Splash(appState: WeatherAppState) {
-    SplashScreen(onNavHome = appState::navigateToHome)
+fun Splash(appState: WeatherAppState, viewModel: SplashViewModel = hiltViewModel()) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    val context = LocalContext.current
+
+    val locationPermissionState = rememberMultiplePermissionsState(
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) listOf(
+            Manifest.permission.CAMERA,
+            Manifest.permission.READ_MEDIA_IMAGES
+        ) else listOf(
+            Manifest.permission.CAMERA,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
+    ) { permissions ->
+        when {
+            permissions.all { it.value } -> viewModel.getAppInfo()
+            else -> viewModel.permissionIsNotGranted()
+        }
+    }
+
+    LaunchedEffect(state) {
+        val requestPermission = state.isRequestPermission
+
+        when {
+            requestPermission -> {
+                when {
+                    locationPermissionState.allPermissionsGranted -> {
+                        viewModel.getAppInfo()
+                    }
+
+                    locationPermissionState.shouldShowRationale -> {
+                        viewModel.permissionIsNotGranted()
+                    }
+
+                    else -> {
+                        locationPermissionState.launchMultiplePermissionRequest()
+                    }
+                }
+            }
+
+            else -> return@LaunchedEffect
+        }
+        viewModel.completePermissionRequest()
+    }
+
+    SplashScreen(state, onNavHome = appState::navigateToHome)
 }
 
 @Composable
-fun SplashScreen(onNavHome: () -> Unit = {}) {
+fun SplashScreen(
+    state: SplashViewState,
+    onNavHome: () -> Unit = {}
+) {
+    if (state.isLoadedData) {
+        LaunchedEffect(true) {
+            delay(SplashWaitTime)
+            onNavHome.invoke()
+        }
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -68,6 +134,6 @@ fun SplashScreen(onNavHome: () -> Unit = {}) {
 @Composable
 fun DefaultPreview() {
     MyWeatherTheme {
-        SplashScreen()
+        SplashScreen(SplashViewState())
     }
 }

@@ -8,10 +8,14 @@ androidx-test-ext-junit = "1.1.5"
 espresso-core = "3.5.1"
 lifecycle-runtime-ktx = "2.6.1"
 activity-compose = "1.7.2"
-compose-bom = "2023.06.01"
+compose-bom = "2023.08.00"
 
 # Gradle
 google-hilt = "2.45"
+google-ksp = "1.8.20-1.0.10"
+
+# KotlinX
+jetbrains-kotlinx-coroutines = "1.6.4"
 
 # AndroidX
 androidx-material3 = "1.1.1"
@@ -25,6 +29,7 @@ androidx-datastore = "1.0.0"
 # Google
 google-dagger = "2.46"
 google-gson = "2.10.1"
+google-accompanist = "0.30.1"
 
 # Network
 okhttp3 = "4.10.0"
@@ -51,6 +56,11 @@ ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "androidx-material3"}
 
+# KotlinX
+kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "jetbrains-kotlinx-coroutines" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "jetbrains-kotlinx-coroutines" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "jetbrains-kotlinx-coroutines" }
 
 # AndroidX
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidx-hilt" }
@@ -69,6 +79,10 @@ androidx-datastore-preferences = { group = "androidx.datastore", name = "datasto
 # Google
 google-dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "google-dagger" }
 google-dagger-hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "google-dagger" }
+google-accompanist-navigation-animation = { group = "com.google.accompanist", name = "accompanist-navigation-animation", version.ref = "google-accompanist" }
+google-accompanist-systemUiController = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "google-accompanist" }
+google-accompanist-flowLayout = { group = "com.google.accompanist", name = "accompanist-flowlayout", version.ref = "google-accompanist" }
+google-accompanist-permission = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "google-accompanist" }
 
 # Network
 google-gson = { group = "com.google.code.gson", name = "gson", version.ref = "google-gson" }
@@ -85,10 +99,17 @@ timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "tim
 # First
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 
 # Added
 google-hilt = { id = "com.google.dagger.hilt.android", version.ref = "google-hilt" }
-
+google-ksp = { id = "com.google.devtools.ksp", version.ref = "google-ksp" }
 
 [bundles]
 retrofit2 = ["retrofit2", 'retrofit2-converter-gson']
+google-accompanist = [
+    "google-accompanist-flowLayout",
+    "google-accompanist-navigation-animation",
+    "google-accompanist-permission",
+    "google-accompanist-systemUiController",
+]
