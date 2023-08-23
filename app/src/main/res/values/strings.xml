@@ -4,6 +4,24 @@
     <string name="splash_logo2">Forcast</string>
 
     <!-- Error -->
+    <string name="error_message_default">Something went wrong!</string>
     <string name="error_title_permission_not_granted">Error with Permission</string>
     <string name="error_message_permission_not_granted">Permission is not granted!\nPlease grant the permission to continue to using app!</string>
+    <string name="error_title_http">Error with HTTP</string>
+    <string name="error_title_http_object">Error with HTTP object</string>
+    <string name="error_message_http">Code: %1$d\nUrl: %2$s</string>
+    <string name="error_message_network">Error with Network</string>
+    <string name="error_message_preferences">Error with Preferences</string>
+    <string name="error_message_params_null">The params in %1$s must non-null.</string>
+    <string name="error_message_current_location_is_null">Cannot get the current location!</string>
+    <string name="error_message_current_address_is_not_found">Cannot get the current address!</string>
+    <string name="error_message_address_is_not_found">Cannot get the address!</string>
+    <string name="error_message_city_is_invalid">City is invalid!</string>
+    <string name="error_message_lat_lng_are_invalid">Latitude and Longitude are invalid!</string>
+
+    <!-- Buttons -->
+    <string name="retry">Retry</string>
+
+    <!-- Navigation -->
+    <string name="login">Login</string>
 </resources>

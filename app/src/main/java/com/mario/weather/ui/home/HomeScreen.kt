@@ -1,4 +1,4 @@
-package com.mario.weather.home
+package com.mario.weather.ui.home
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme

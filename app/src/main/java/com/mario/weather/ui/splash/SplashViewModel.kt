@@ -1,4 +1,4 @@
-package com.mario.weather.splash
+package com.mario.weather.ui.splash
 
 import android.annotation.SuppressLint
 import android.content.Context

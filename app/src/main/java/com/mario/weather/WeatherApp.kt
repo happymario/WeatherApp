@@ -7,16 +7,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.mario.weather.home.Home
-import com.mario.weather.splash.Splash
+import com.mario.weather.ui.component.NavigationDrawerLabel
+import com.mario.weather.ui.home.Home
+import com.mario.weather.ui.splash.Splash
 
 @Composable
 fun WeatherApp(appState: WeatherAppState = rememberWeatherAppState()) {
@@ -34,7 +37,9 @@ fun WeatherApp(appState: WeatherAppState = rememberWeatherAppState()) {
         gesturesEnabled = appState.shouldEnableGesture,
         drawerContent = {
             ModalDrawerSheet {
-
+                NavigationDrawerLabel {
+                    Text(text = stringResource(id = R.string.login))
+                }
             }
         }
     ) {

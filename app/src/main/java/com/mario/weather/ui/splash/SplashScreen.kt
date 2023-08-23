@@ -1,4 +1,4 @@
-package com.mario.weather.splash
+package com.mario.weather.ui.splash
 
 import android.Manifest
 import android.os.Build
@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -28,6 +29,8 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.mario.weather.R
 import com.mario.weather.WeatherAppState
+import com.mario.weather.ui.component.AppScaffold
+import com.mario.weather.ui.component.InfinityText
 import com.mario.weather.ui.theme.CustomTheme
 import com.mario.weather.ui.theme.MyWeatherTheme
 import com.mario.weather.ui.theme.SplashGradient1
@@ -82,11 +85,24 @@ fun Splash(appState: WeatherAppState, viewModel: SplashViewModel = hiltViewModel
         viewModel.completePermissionRequest()
     }
 
-    SplashScreen(state, onNavHome = appState::navigateToHome)
+    SplashScreen(state, onNavHome = appState::navigateToHome, onDismissErrorDialog = {
+        viewModel.hideError()
+    })
 }
 
 @Composable
 fun SplashScreen(
+    state: SplashViewState,
+    onNavHome: () -> Unit = {},
+    onDismissErrorDialog: () -> Unit = {},
+) {
+    AppScaffold(state = state, onDismissErrorDialog = onDismissErrorDialog) { _, viewState ->
+        SplashContent(state, onNavHome = onNavHome)
+    }
+}
+
+@Composable
+fun SplashContent(
     state: SplashViewState,
     onNavHome: () -> Unit = {}
 ) {
@@ -121,10 +137,18 @@ fun SplashScreen(
                 text = stringResource(id = R.string.splash_logo1),
                 style = CustomTheme.typography.heading01.copy(color = CustomTheme.colors.splash_logo_title)
             )
-            Text(
-                text = stringResource(id = R.string.splash_logo2),
-                style = CustomTheme.typography.heading02.copy(color = CustomTheme.colors.splash_logo_sub),
-                modifier = Modifier.offset(y = (-10).dp)
+            InfinityText(
+                texts = arrayListOf(stringResource(id = R.string.splash_logo2)),
+                delayTime = 4000L,
+                modifier = Modifier.offset(y = (-10).dp),
+                content = { targetState ->
+                    Text(
+                        text = targetState,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        style = CustomTheme.typography.heading02.copy(color = CustomTheme.colors.splash_logo_sub),
+                    )
+                }
             )
         }
     }
