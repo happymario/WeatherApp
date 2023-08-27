@@ -103,6 +103,7 @@ dependencies {
     implementation(libs.bundles.retrofit2)
     implementation(libs.okhttp3)
     implementation(libs.okhttp3.logging.interceptor)
+    implementation(libs.coil.image)
 
     // Other
     implementation(libs.timber)

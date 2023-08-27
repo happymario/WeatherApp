@@ -29,6 +29,7 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.mario.weather.R
 import com.mario.weather.WeatherAppState
+import com.mario.weather.ui.component.ActionType
 import com.mario.weather.ui.component.AppScaffold
 import com.mario.weather.ui.component.InfinityText
 import com.mario.weather.ui.theme.CustomTheme
@@ -85,9 +86,26 @@ fun Splash(appState: WeatherAppState, viewModel: SplashViewModel = hiltViewModel
         viewModel.completePermissionRequest()
     }
 
-    SplashScreen(state, onNavHome = appState::navigateToHome, onDismissErrorDialog = {
-        viewModel.hideError()
-    })
+    SplashScreen(
+        state,
+        onNavHome = appState::navigateToHome,
+        onDismissErrorDialog = {
+            viewModel.hideError()
+        },
+        onErrorPositiveAction = { action, _ ->
+            action?.let {
+                when (it) {
+                    ActionType.CANCEL -> {
+                        viewModel.retry()
+                    }
+
+                    ActionType.CONFIRM -> {
+                        appState.openAppSetting(context)
+                    }
+                }
+            }
+        },
+    )
 }
 
 @Composable
@@ -95,8 +113,13 @@ fun SplashScreen(
     state: SplashViewState,
     onNavHome: () -> Unit = {},
     onDismissErrorDialog: () -> Unit = {},
+    onErrorPositiveAction: (action: ActionType?, value: Any?) -> Unit = { _, _ -> },
 ) {
-    AppScaffold(state = state, onDismissErrorDialog = onDismissErrorDialog) { _, viewState ->
+    AppScaffold(
+        state = state,
+        onDismissErrorDialog = onDismissErrorDialog,
+        onErrorPositiveAction = onErrorPositiveAction
+    ) { _, viewState ->
         SplashContent(state, onNavHome = onNavHome)
     }
 }

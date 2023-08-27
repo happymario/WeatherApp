@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.mario.weather.R
 import com.mario.weather.base.BaseViewState
 import com.mario.weather.data.exception.AppException
+import com.mario.weather.util.CommonUtil
 
 enum class ActionType {
     CONFIRM, CANCEL
@@ -100,6 +101,18 @@ fun HandleError(
                 positiveAction = onPositiveAction,
                 negativeAction = onNegativeAction,
             )
+        }
+
+        is AppException.ToastException -> {
+            CommonUtil.showToast(context, error.message)
+        }
+
+        is AppException.ServerHttp -> {
+            CommonUtil.showToast(context, error.message)
+        }
+
+        is AppException.Network -> {
+            CommonUtil.showToast(context, context.getString(R.string.error_message_network))
         }
 
         else -> {
