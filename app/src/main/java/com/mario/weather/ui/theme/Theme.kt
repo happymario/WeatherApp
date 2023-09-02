@@ -32,17 +32,17 @@ private val LightColorScheme = lightColorScheme(
 
 object CustomTheme {
 
-    val colors: WeatherColors
+    val colors: CustomColors
         @Composable
         @ReadOnlyComposable
         get() = LocalColors.current
 
-    val typography: WeatherTypography
+    val typography: CustomTypography
         @Composable
         @ReadOnlyComposable
         get() = LocalTypography.current
 
-    val spaces: WeatherSpaces
+    val spaces: CustomSpaces
         @Composable
         @ReadOnlyComposable
         get() = LocalSpaces.current
@@ -50,10 +50,10 @@ object CustomTheme {
 
 @Composable
 fun MyWeatherTheme(
-    spaces: WeatherSpaces = CustomTheme.spaces,
-    typography: WeatherTypography = CustomTheme.typography,
-    colors: WeatherColors = CustomTheme.colors,
-    darkColors: WeatherColors? = null,
+    spaces: CustomSpaces = CustomTheme.spaces,
+    typography: CustomTypography = CustomTheme.typography,
+    colors: CustomColors = CustomTheme.colors,
+    darkColors: CustomColors? = DarkColorPalette,
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,

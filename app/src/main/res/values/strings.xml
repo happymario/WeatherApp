@@ -21,6 +21,7 @@
 
     <!-- Buttons -->
     <string name="retry">Retry</string>
+    <string name="skip">Skip</string>
 
     <!-- Navigation -->
     <string name="login">Login</string>

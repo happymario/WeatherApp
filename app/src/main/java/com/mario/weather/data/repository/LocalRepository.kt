@@ -9,6 +9,10 @@ interface LocalRepository {
 
     suspend fun getAppInfo(): Flow<AppInfo>
 
+    suspend fun setTutofinished(boolean: Boolean)
+
+    fun isTutoFinished(): Flow<Boolean>
+
     fun getSearchAddress(): Flow<List<HistorySearchAddressEntity>>
 
     suspend fun addSearchAddress(historySearchAddressEntity: HistorySearchAddressEntity)

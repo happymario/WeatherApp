@@ -20,6 +20,7 @@ import androidx.navigation.compose.composable
 import com.mario.weather.ui.component.NavigationDrawerLabel
 import com.mario.weather.ui.home.Home
 import com.mario.weather.ui.splash.Splash
+import com.mario.weather.ui.tuto.Tuto
 
 @Composable
 fun WeatherApp(appState: WeatherAppState = rememberWeatherAppState()) {
@@ -55,6 +56,9 @@ fun WeatherApp(appState: WeatherAppState = rememberWeatherAppState()) {
             ) {
                 composable(NestedGraph.SPLASH.route) { from ->
                     Splash(appState)
+                }
+                composable(NestedGraph.TUTO.route) { from ->
+                    Tuto(appState)
                 }
                 composable(NestedGraph.HOME.route) { from ->
                     Home(appState)

@@ -57,6 +57,15 @@ class WeatherAppState(
         }
     }
 
+    fun navigateToTuto() {
+        closeDrawer()
+        controller.navigate(route = NestedGraph.TUTO.route) {
+            popUpTo(NestedGraph.SPLASH.route) {
+                inclusive = true
+            }
+        }
+    }
+
     fun openAppSetting(context: Context) {
         val intent = Intent(
             Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
@@ -69,5 +78,5 @@ class WeatherAppState(
 }
 
 enum class NestedGraph(val route: String) {
-    HOME(route = "home_nav"), SPLASH(route = "splash_nav"),
+    HOME(route = "home_nav"), SPLASH(route = "splash_nav"), TUTO(route = "tuto_nav"),
 }

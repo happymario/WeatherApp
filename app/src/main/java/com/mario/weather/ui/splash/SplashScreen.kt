@@ -34,8 +34,6 @@ import com.mario.weather.ui.component.AppScaffold
 import com.mario.weather.ui.component.InfinityText
 import com.mario.weather.ui.theme.CustomTheme
 import com.mario.weather.ui.theme.MyWeatherTheme
-import com.mario.weather.ui.theme.SplashGradient1
-import com.mario.weather.ui.theme.SplashGradient2
 import kotlinx.coroutines.delay
 
 private const val SplashWaitTime: Long = 3000
@@ -88,6 +86,8 @@ fun Splash(appState: WeatherAppState, viewModel: SplashViewModel = hiltViewModel
 
     SplashScreen(
         state,
+        checkNext = viewModel::checkNextScreen,
+        onNavTuto = appState::navigateToTuto,
         onNavHome = appState::navigateToHome,
         onDismissErrorDialog = {
             viewModel.hideError()
@@ -111,6 +111,8 @@ fun Splash(appState: WeatherAppState, viewModel: SplashViewModel = hiltViewModel
 @Composable
 fun SplashScreen(
     state: SplashViewState,
+    checkNext: () -> Unit = {},
+    onNavTuto: () -> Unit = {},
     onNavHome: () -> Unit = {},
     onDismissErrorDialog: () -> Unit = {},
     onErrorPositiveAction: (action: ActionType?, value: Any?) -> Unit = { _, _ -> },
@@ -120,18 +122,32 @@ fun SplashScreen(
         onDismissErrorDialog = onDismissErrorDialog,
         onErrorPositiveAction = onErrorPositiveAction
     ) { _, viewState ->
-        SplashContent(state, onNavHome = onNavHome)
+        SplashContent(state, checkNext = checkNext, onNavTuto = onNavTuto, onNavHome = onNavHome)
     }
 }
 
 @Composable
 fun SplashContent(
     state: SplashViewState,
+    checkNext: () -> Unit = {},
+    onNavTuto: () -> Unit = {},
     onNavHome: () -> Unit = {}
 ) {
     if (state.isLoadedData) {
         LaunchedEffect(true) {
             delay(SplashWaitTime)
+            checkNext.invoke()
+        }
+    }
+
+    if (state.naviTuto) {
+        LaunchedEffect(true) {
+            onNavTuto.invoke()
+        }
+    }
+
+    if (state.naviHome) {
+        LaunchedEffect(true) {
             onNavHome.invoke()
         }
     }
@@ -140,9 +156,7 @@ fun SplashContent(
         modifier = Modifier
             .fillMaxSize()
             .background(
-                brush = Brush.verticalGradient(
-                    listOf(SplashGradient1, SplashGradient2),
-                ),
+                brush = Brush.verticalGradient(CustomTheme.colors.splash_gradient),
                 shape = RectangleShape,
                 alpha = 1.0f
             )
@@ -158,7 +172,7 @@ fun SplashContent(
             )
             Text(
                 text = stringResource(id = R.string.splash_logo1),
-                style = CustomTheme.typography.heading01.copy(color = CustomTheme.colors.splash_logo_title)
+                style = CustomTheme.typography.heading01.copy(color = CustomTheme.colors.title1)
             )
             InfinityText(
                 texts = arrayListOf(stringResource(id = R.string.splash_logo2)),
@@ -169,7 +183,7 @@ fun SplashContent(
                         text = targetState,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
-                        style = CustomTheme.typography.heading02.copy(color = CustomTheme.colors.splash_logo_sub),
+                        style = CustomTheme.typography.heading02.copy(color = CustomTheme.colors.subtitle1),
                     )
                 }
             )

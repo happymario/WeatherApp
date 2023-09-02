@@ -16,6 +16,12 @@ class LocalRepositoryImpl @Inject constructor(
 
     override suspend fun getAppInfo() = preferenceStorage.getModel(AppInfo::class.java)
 
+    override suspend fun setTutofinished(boolean: Boolean) {
+        preferenceStorage.setTutoFinished(boolean)
+    }
+
+    override fun isTutoFinished(): Flow<Boolean> = preferenceStorage.isTutoFinished
+
     override suspend fun addSearchAddress(historySearchAddressEntity: HistorySearchAddressEntity) {
         searchAddressDao.insertOrUpdate(historySearchAddressEntity)
     }

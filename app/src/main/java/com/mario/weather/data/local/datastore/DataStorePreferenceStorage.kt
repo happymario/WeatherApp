@@ -2,6 +2,7 @@ package com.mario.weather.data.local.datastore
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.core.stringSetPreferencesKey
 import com.google.gson.Gson
@@ -16,7 +17,7 @@ class DataStorePreferenceStorage @Inject constructor(
 ) : PreferenceStorage {
 
     override suspend fun <T : BaseModel> setModel(model: T?) {
-        val key: String = PreferenceKeys.PREFS_MODEL.name + model?.javaClass?.name
+        val key: String = PreferenceKeys.PREFIX_MODEL.name + model?.javaClass?.name
         val value = if (model == null) "" else Gson().toJson(model)
 
         val preferencesKey = stringPreferencesKey(key)
@@ -26,7 +27,7 @@ class DataStorePreferenceStorage @Inject constructor(
     }
 
     override suspend fun <T : BaseModel> removeModel(type: Class<T>) {
-        val key: String = PreferenceKeys.PREFS_MODEL.name + type.name
+        val key: String = PreferenceKeys.PREFIX_MODEL.name + type.name
         val preferencesKey = stringPreferencesKey(key)
         dataStore.setValue { preferences ->
             preferences[preferencesKey] = ""
@@ -34,14 +35,25 @@ class DataStorePreferenceStorage @Inject constructor(
     }
 
     override suspend fun <T : BaseModel?> getModel(type: Class<T>): Flow<T> {
-        val key: String = PreferenceKeys.PREFS_MODEL.name + type.name
+        val key: String = PreferenceKeys.PREFIX_MODEL.name + type.name
         val preferencesKey = stringPreferencesKey(key)
         val preferences = dataStore.data.first()
         return flow { Gson().fromJson(preferences[preferencesKey], type) }
     }
 
+    override suspend fun setTutoFinished(isFinished: Boolean) {
+        dataStore.setValue {
+            it[PreferenceKeys.IS_TUTO_FINISHED] = isFinished
+        }
+    }
+
+    override val isTutoFinished: Flow<Boolean> = dataStore.getValue {
+        it[PreferenceKeys.IS_TUTO_FINISHED] ?: false
+    }
+
     object PreferenceKeys {
-        val PREFS_MODEL = stringSetPreferencesKey("PREFS_MODEL")
+        val PREFIX_MODEL = stringSetPreferencesKey("PREFIX_MODEL")
+        val IS_TUTO_FINISHED = booleanPreferencesKey("IS_TUTO_FINISHED")
     }
 
     companion object {

@@ -32,7 +32,7 @@ class SplashViewModel @Inject constructor(
     }
 
     fun getAppInfo() {
-        launchAPI {
+        launchScope {
             showLoading()
 
             repository.getAppInfo().collect { it ->
@@ -59,6 +59,22 @@ class SplashViewModel @Inject constructor(
             it.copy(
                 isRequestPermission = false,
             )
+        }
+    }
+
+    fun checkNextScreen() {
+        launchScope {
+            localRepository.isTutoFinished().collect {
+                if (it) {
+                    _state.update {
+                        it.copy(naviHome = true)
+                    }
+                } else {
+                    _state.update {
+                        it.copy(naviTuto = true)
+                    }
+                }
+            }
         }
     }
 
@@ -98,5 +114,7 @@ data class SplashViewState(
     override val isLoading: Boolean = false,
     override val error: Throwable? = null,
     val isRequestPermission: Boolean = false,
-    val isLoadedData: Boolean = false
+    val isLoadedData: Boolean = false,
+    val naviHome: Boolean = false,
+    val naviTuto: Boolean = false
 ) : BaseViewState()

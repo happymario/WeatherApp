@@ -7,4 +7,6 @@ interface PreferenceStorage {
     suspend fun <T : BaseModel> setModel(model: T?)
     suspend fun <T : BaseModel> removeModel(type: Class<T>)
     suspend fun <T : BaseModel?> getModel(type: Class<T>): Flow<T>
+    suspend fun setTutoFinished(isFinished: Boolean)
+    val isTutoFinished: Flow<Boolean>
 }

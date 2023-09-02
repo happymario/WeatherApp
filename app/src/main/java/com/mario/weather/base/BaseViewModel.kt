@@ -30,7 +30,7 @@ open class BaseViewModel : ViewModel() {
 
     private var callApi: suspend CoroutineScope.() -> Unit = {}
 
-    fun launchAPI(
+    fun launchScope(
         context: CoroutineContext = EmptyCoroutineContext,
         start: CoroutineStart = CoroutineStart.DEFAULT,
         api: suspend CoroutineScope.() -> Unit,

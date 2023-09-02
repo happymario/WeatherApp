@@ -44,7 +44,7 @@ val Typography = Typography(
     ),
 )
 
-data class WeatherTypography(
+data class CustomTypography(
     val heading01: TextStyle = TextStyle(
         fontFamily = DefaultFontFamily,
         fontWeight = FontWeight.SemiBold,
@@ -56,7 +56,12 @@ data class WeatherTypography(
         fontWeight = FontWeight.Normal,
         lineHeight = 33.sp,
         fontSize = 24.sp
+    ),
+    val btnTitle1: TextStyle = TextStyle(
+        fontFamily = DefaultFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 14.sp
     )
 )
 
-val LocalTypography = staticCompositionLocalOf { WeatherTypography() }
+val LocalTypography = staticCompositionLocalOf { CustomTypography() }
