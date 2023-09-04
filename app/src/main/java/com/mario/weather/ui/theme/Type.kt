@@ -61,7 +61,18 @@ data class CustomTypography(
         fontFamily = DefaultFontFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 14.sp
-    )
+    ),
+    val heading03: TextStyle = TextStyle(
+        fontFamily = DefaultFontFamily,
+        fontWeight = FontWeight.SemiBold,
+        lineHeight = 33.sp,
+        fontSize = 28.sp
+    ),
+    val heading04: TextStyle = TextStyle(
+        fontFamily = DefaultFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp
+    ),
 )
 
 val LocalTypography = staticCompositionLocalOf { CustomTypography() }

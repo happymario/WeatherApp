@@ -34,7 +34,7 @@ class WeatherAppState(
     val snackbarHost: SnackbarHostState,
 ) {
     val shouldEnableGesture: Boolean
-        @Composable get() = controller.currentBackStackEntryAsState().value?.destination?.route != NestedGraph.SPLASH.route
+        @Composable get() = controller.currentBackStackEntryAsState().value?.destination?.route == NestedGraph.HOME.route
 
     fun openDrawer() {
         coroutineScope.launch {

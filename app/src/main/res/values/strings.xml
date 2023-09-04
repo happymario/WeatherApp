@@ -25,4 +25,19 @@
 
     <!-- Navigation -->
     <string name="login">Login</string>
+
+    <!-- Tuto -->
+    <string-array name="arr_tuto_title">
+        <item>Detailed Hourly\nForecast</item>
+        <item>Real-Time\nWeather Map</item>
+        <item>Weather Around\nthe World</item>
+        <item>Detailed Hourly\nForecast</item>
+    </string-array>
+    <string-array name="arr_tuto_content">
+        <item>Get in - depth weather\ninformation.</item>
+        <item>Watch the progress of the\nprecipitation to stay informed</item>
+        <item>Add any location you want and\nswipe easily to chnage.</item>
+        <item>Get in - depth weather\ninformation.</item>
+    </string-array>
+
 </resources>

@@ -46,6 +46,11 @@ object CustomTheme {
         @Composable
         @ReadOnlyComposable
         get() = LocalSpaces.current
+
+    val shapes: CustomShapes
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalShapes.current
 }
 
 @Composable

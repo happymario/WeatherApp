@@ -25,6 +25,8 @@ val TutoGradient = listOf(TutoGradient1, TutoGradient2)
 val Title1 = Color(0xFF0A0A22)
 val SubTitle1 = Color(0xFF8B95A2)
 val BtnTitle1 = Color.White
+val IndicatorSelected = Color(0xFF0A0A22)
+val IndicatorUnSelected = Color(0xFFFFFFFF)
 
 // dark를 이용할때 recomposition이 되어야 하므로 mutableStateOf가 되어야 함.
 class CustomColors(
@@ -34,6 +36,8 @@ class CustomColors(
     subtitle1: Color = SubTitle1,
     tuto_gradient: List<Color> = SplashGradient,
     btn_title1: Color = BtnTitle1,
+    indicator_selected: Color = IndicatorSelected,
+    indicator_unselected: Color = IndicatorUnSelected,
     isDark: Boolean
 ) {
     var primary by mutableStateOf(Purple80)
@@ -48,6 +52,10 @@ class CustomColors(
         private set
     var btn_title1 by mutableStateOf(BtnTitle1)
         private set
+    var indicator_selected by mutableStateOf(IndicatorSelected)
+        private set
+    var indicator_unselected by mutableStateOf(IndicatorUnSelected)
+        private set
     var isDark by mutableStateOf(isDark)
         private set
 
@@ -58,6 +66,8 @@ class CustomColors(
         subtitle1 = other.subtitle1
         tuto_gradient = other.tuto_gradient
         btn_title1 = other.btn_title1
+        indicator_selected = other.indicator_selected
+        indicator_unselected = other.indicator_unselected
         isDark = other.isDark
     }
 
@@ -68,6 +78,8 @@ class CustomColors(
         subtitle1 = subtitle1,
         tuto_gradient = tuto_gradient,
         btn_title1 = btn_title1,
+        indicator_selected = indicator_selected,
+        indicator_unselected = indicator_unselected,
         isDark = isDark
     )
 }
